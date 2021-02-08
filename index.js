@@ -50,10 +50,19 @@ const fetchCosmetic = async (name, type) => {
     console.log('https://www.epicgames.com/id/logout?redirectUrl=https%3A//www.epicgames.com/id/login/epic%3FredirectUrl%3Dhttps%253A%252F%252Fwww.epicgames.com%252Fid%252Fapi%252Fredirect%253FclientId%253D3446cd72694c4a4485d81b77adbb2141%2526responseType%253Dcode ')
     auth = { authorizationCode: async () => Client.consoleQuestion('Please enter an authorization code: ') };
   }
+
+
+
+
+
+
+
+
 const handleCommand = async (m) => {
   if (!m.content.startsWith('@')) return;
   const args = m.content.slice(1).split(' ');
   const command = args.shift().toLowerCase();
+
 
 
 
@@ -65,8 +74,7 @@ const handleCommand = async (m) => {
   if (command === 'outfit' || command === 'skin') {
     const skin = await fetchCosmetic(args.join(' '), 'outfit');
     if (skin) {
-      m.Client.party.me.setOutfit(skin.id);
-      client.party.me.setLevel(config.level);
+      client.party.me.setOutfit(skin.id);
       m.reply(`Set the skin to ${skin.name}!`);
     } else m.reply(`The skin ${args.join(' ')} wasn't found!`);
   } else if (command === 'emote' || command === 'dance') {
@@ -100,6 +108,7 @@ const handleCommand = async (m) => {
   } 
 
 const client = new Client(logon);
+
   
 
   
@@ -113,7 +122,7 @@ const client = new Client(logon);
 client.on('friend:message', (friendMessage) => {
   console.log(`Message from party member: ${friendMessage.content}`);
   if (friendMessage.content.toLowerCase().startsWith('@about')) {
-    friendMessage.author.sendMessage('This bot was developed for discord.gg/swrgVFn9 Here are the commands: ');
+    friendMessage.author.sendMessage('This bot was developed for discord.gg/swrgVFn9 Here are the commands: @help, @skin, @emote, @purpleskull, @pinkghoul, @backpack, @pickaxe');
   }
 });
 
@@ -121,7 +130,7 @@ client.on('friend:message', (friendMessage) => {
 
   client.on('friend:request', (req) => {
     if(friendAccept = true){
-      inv.accept()
+      req.accept()
     }
   });
 
@@ -131,6 +140,8 @@ client.on('friend:message', (friendMessage) => {
 client.on('party:invite', (inv) => {
     if (partyAccept = true){
       inv.accept()
+      client.party.me.setOutfit('CID_029_Athena_Commando_F_Halloween', [{ channel: 'Material', variant: 'Mat3' }])
+      client.party.me.setLevel(config.level);
     }
   });
 
