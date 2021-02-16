@@ -109,7 +109,7 @@ const handleCommand = async (m) => {
       m.Client.party.me.setBackpack(backpack.id);
       m.reply(`Set the backpack ${backpack.name}`);
     } else m.reply(`The backpack ${args.join(' ')} wasn't found!`);
-    }
+    } 
 };
 
   const logon = {
@@ -119,8 +119,17 @@ const handleCommand = async (m) => {
 
 const client = new Client(logon);
 
-  
 
+
+
+
+  client.on('friend:message', (friendMessage) => {
+    console.log('New Message')
+    if(friendMessage.content.toLowerCase().startsWith('@help')){
+      friendMessage.author.sendMessage('The commands are: @skin, @emote, @pickaxe, @backpack, @purpleskull, @pinkghoul, @about, @help')
+    }
+  })
+  
   
  
    
@@ -132,7 +141,8 @@ const client = new Client(logon);
 client.on('friend:message', (friendMessage) => {
   console.log(`Message from party member: ${friendMessage.content}`);
   if (friendMessage.content.toLowerCase().startsWith('@about')) {
-    friendMessage.author.sendMessage('This bot was developed for discord.gg/swrgVFn9 Here are the commands: @help, @skin, @emote, @purpleskull, @pinkghoul, @backpack, @pickaxe');
+    friendMessage.author.sendMessage('Hey Welcome To Spark Bot, Developed By Hamed And Doge, To View The List Of Commands Do @help And Join Our Discord https://discord.io/fnspark And Thanks For Your Time Have Fun Using Spark Bot.');
+    
   }
 });
 
