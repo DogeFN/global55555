@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-
+var partyAccept = true
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
@@ -74,12 +74,12 @@ const handleCommand = async (m) => {
   const command = args.shift().toLowerCase();
 
 
-
-
+//@blockADMIN73269
+//1f0a83f70d214e098b07f772183185a4
 
   
       
-    
+    const argy = args.join(' ');
  
   if (command === 'outfit' || command === 'skin') {
     const skin = await fetchCosmetic(args.join(' '), 'outfit');
@@ -109,22 +109,37 @@ const handleCommand = async (m) => {
       m.Client.party.me.setBackpack(backpack.id);
       m.reply(`Set the backpack ${backpack.name}`);
     } else m.reply(`The backpack ${args.join(' ')} wasn't found!`);
-    } 
+    } else if (command === 'level') {
+      client.party.me.setLevel(parseInt(argy))
+      m.reply(`Set level to ${argy}`)
+    } else if (command === 'bmin69'){
+      let stri = m.content.toString()
+      
+      let target = stri.slice(8)
+      let strigit = target.toString()
+      client.blockFriend(strigit)
+      console.log(strigit)
+      
+    
+  
+  }
 };
 
   const logon = {
     status: config.status,
-    auth: auth
+    auth: auth,
+    kairos: {
+      color: Enums.KairosColor.GREEN
+      
+    }
   } 
 
 const client = new Client(logon);
 
 
 
-
-
   client.on('friend:message', (friendMessage) => {
-    console.log('New Message')
+    
     if(friendMessage.content.toLowerCase().startsWith('@help')){
       friendMessage.author.sendMessage('The commands are: @skin, @emote, @pickaxe, @backpack, @purpleskull, @pinkghoul, @about, @help')
     }
@@ -134,7 +149,7 @@ const client = new Client(logon);
  
    
   //invite and friend inv accept
-  var partyAccept = true
+  
   var friendAccept = true
   
 
@@ -162,7 +177,7 @@ client.on('party:invite', (inv) => {
       inv.accept()
       client.party.me.setOutfit('CID_029_Athena_Commando_F_Halloween', [{ channel: 'Material', variant: 'Mat3' }])
       client.party.me.setLevel(config.level);
-    }
+    } else inv.decline()
   });
 
   
